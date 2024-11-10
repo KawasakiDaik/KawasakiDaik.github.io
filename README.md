@@ -1,0 +1,1 @@
+# KawasakiDaik.github.io
