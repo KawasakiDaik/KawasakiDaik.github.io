@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="author" content="川﨑 大輝" />
+        <title>川﨑 大輝 -KAWASAKI Daiki-</title>
+        <!-- Favicon-->
+        <link rel="icon" href="assets/favicon.ico" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <style>
+            .backdrop-blur-md {
+                backdrop-filter: blur(12px);
+            }
+            .gradient-text {
+                background: linear-gradient(to right, #60A5FA 48%, #A855F7 60%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        </style>
+    </head>
+<body class="min-h-screen bg-black text-white">
+           <!-- Navigation -->
+<nav class="w-full bg-black/80 backdrop-blur-md relative">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <a href="index.html#home" class="text-3xl font-bold text-white">
+                KAWASAKI Daiki
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
+                
+                <!-- Research Dropdown -->
+                <div class="relative group">
+                    <!-- Link to research.html -->
+                    <a href="research.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                        RESEARCH
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <!-- Dropdown menu -->
+                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                        <div class="py-1">
+                            <a href="research.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
+                            <a href="research.html#achievements" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Achievements</a>
+                            <a href="research.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Dropdown -->
+                <div class="relative group">
+                    <!-- Link to art.html -->
+                    <a href="art.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                        ART
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <!-- Dropdown menu -->
+                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                        <div class="py-1">
+                            <a href="art.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
+                            <a href="art.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
+                            <a href="art.html#works" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Works</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+            </div>   
+        </div>
+    </div>   
+
+    <!-- Mobile Menu Button -->
+    <button class="absolute top-4 right-4 md:hidden" id="menuButton">
+        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+        </svg>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden bg-black">
+        <div class="px-4 py-4 space-y-4">
+            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+            <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
+            
+            <!-- Mobile Research Submenu -->
+            <div class="space-y-1">
+                <a href="research.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="researchSubmenu" data-icon="researchIcon">
+                    RESEARCH
+                    <svg id="researchIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                <div id="researchSubmenu" class="hidden pl-4 space-y-2">
+                    <a href="research.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                    <a href="research.html#achievements" class="block text-sm text-gray-300 hover:text-white">Achievements</a>
+                    <a href="research.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                </div>
+            </div>
+
+            <!-- Mobile Art Submenu -->
+            <div class="space-y-1">
+                <a href="art.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="artSubmenu" data-icon="artIcon">
+                    ART
+                    <svg id="artIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                <div id="artSubmenu" class="hidden pl-4 space-y-2">
+                    <a href="art.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                    <a href="art.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                    <a href="art.html#works" class="block text-sm text-gray-300 hover:text-white">Works</a>
+                </div>
+            </div>
+
+            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+       // Toggle dropdown menus
+        document.querySelectorAll('[data-toggle="dropdown"]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // デフォルトの挙動を停止
+                
+                const targetId = link.getAttribute('data-target');
+                const iconId = link.getAttribute('data-icon');
+                const submenu = document.getElementById(targetId);
+                const icon = document.getElementById(iconId);
+
+                // クリックした要素がアイコン（SVG）またはそのパスの場合
+                if (event.target.tagName === 'svg' || event.target.tagName === 'path') {
+                    // サブメニューの表示切り替えのみ
+                    submenu.classList.toggle('hidden');
+                    
+                    // アイコンの回転
+                    if (submenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                } else {
+                    // アイコン以外をクリックした場合は、リンク先に遷移
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+    </script>
+</nav>
+     
+    <main class="pt-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-5xl font-bold text-center mb-16 gradient-text">RESEARCH</h1>
+
+            <!-- Overview -->
+            <section id="overview" class="mb-20">
+                <h2 class="text-3xl font-semibold text-center mb-8">Overview</h2>
+                <div class="bg-gray-900 p-8 rounded-2xl">
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        目には見えない，耳には聞こえない，知覚や伝達が困難な生命・環境の物質的情報を「光」に変換し，光通信網と計算機を介してリアルタイムで相互作用できるシステムを追究する．このシステムの核になる物質–光変換技術を実現するため，人工ナノ構造により光を自在に操作する技術「メタフォトニクス」を応用して，微小・微量の物質に応答するマイクロセンサ，微小・微量のエネルギー変化で光信号を変調するマイクロアクチュエータを開発する．これらのマイクロデバイスと人工知能の協奏により，物質情報をリアルタイムに解析・制御し，生命や環境の動的調和を導くシステム－光を介して調和する生命・環境「光化する自然」－の実現を目指す．    
+                    </p>
+                    <div class="flex flex-col items-center space-y-0">
+                        <a href="https://researchmap.jp/daiki_k/?lang=ja" 
+                        target="_blank" 
+                        rel="noopener" 
+                        class="text-blue-400 hover:text-blue-300 transition-colors">
+                            researchmap
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=TTlm0n0AAAAJ&hl=ja" 
+                        target="_blank" 
+                        rel="noopener" 
+                        class="text-blue-400 hover:text-blue-300 transition-colors">
+                        Google Scholar
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Projects -->
+            <section id="projects" class="mb-20">
+            <h2 class="text-3xl font-semibold text-center mb-8">Projects</h2>
+                <div class="grid gap-8">
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                        <h3 class="text-xl font-medium text-center mb-4">1.ナノフォトニックバイオ/化学センサ</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- 左側テキスト -->
+                            <div class="text-center">
+                                <p class="text-gray-300 text-center mb-4">
+                                    Coming soon.
+                                </p>
+                            </div>
+                            <!-- 右側画像 -->
+                            <div class="relative flex items-center justify-center">
+                                 <div class="w-72 h-[162px] rounded-3xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 p-1">
+                                    <img
+                                        src="assets/PhC_Protein.png"
+                                        alt="Image"
+                                        class="w-full h-full object-cover rounded-3xl"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                        <h3 class="text-xl font-medium text-center mb-4">2. ピクセルイメージングバイオセンサ</h3>
+                        <div class="aspect-video mb-6 bg-gray-800 rounded-lg overflow-hidden">
+                            <img src="project2.jpg" alt="Coming soon." class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-300 mb-4"></p>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                        <h3 class="text-xl font-medium text-center mb-4">3. バイオアクティブアクチュエータ</h3>
+                        <div class="aspect-video mb-6 bg-gray-800 rounded-lg overflow-hidden">
+                            <img src="project3.jpg" alt="Coming soon." class="w-full h-full object-cover">
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4"></p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Achievements -->
+            <section id="achievements" class="mb-20">
+                <h2 class="text-3xl font-semibold text-center mb-8">Achievements</h2>
+                <div class="grid gap-8">
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <!-- 論文Section -->
+                        <div id=publication class="space-y-8">  <!-- 各論文エントリー間のスペースを追加 -->
+                            <h2 class="text-2xl font-semibold text-center mb-4">Publication</h2>
+                            <div>
+                                <a href="https://doi.org/10.1016/j.bios.2024.116659" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Dealing with plasmonic crystal biosensors: Sensitivity assessment of nanodisks/nanoholes arrayed plasmonic system for label-free DNA detection</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Ryosuke Nishitsuji, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Biosensors and Bioelectronics, 2024</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/s24144599" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Nanoimprinted Plasmonic Crystals for Cost-Effective SERS Identification of Methylated DNAs.</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Ryosuke Nishitsuji, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Sensors(Basel, Switzerland) 24(14), 2024</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1016/j.bios.2024.116659" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Dealing with plasmonic crystal biosensors: Sensitivity assessment of nanodisks/nanoholes arrayed plasmonic system for label-free DNA detection </strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Ryosuke Nishitsuji, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Biosensors and Bioelectronics, 2024</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/s24144599" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Nanoimprinted Plasmonic Crystals for Cost-Effective SERS Identification of Methylated DNAs.</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Ryosuke Nishitsuji, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Sensors(Basel, Switzerland) 24(14), 2024</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1039/d3ra03245kDielectrophoretic" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong> Trapping of nanosized biomolecules on plasmonic nanohole arrays for biosensor applications: simple fabrication and visible-region detection</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Satoko Fujiwara, Misaki Hata, Ikumi Onohara, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Masato Suzuki, Tomoyuki Yasukawa, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> RSC Advances 13(31) 21118-21126, 2023</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/mi13081182" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Gold Nanocone Array with Extensive Electromagnetic Fields for Highly Reproducible Surface-Enhanced Raman Scattering Measurements </strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Satoko Fujiwara, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Micromachines 13(8), 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1016/j.mee.2022.111842" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Quantum dots / TiO<sub>2</sub> hybrid photonic crystal: Fabrication and application for highly sensitive and visible region-responsive biosensor</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Shotaro Ueda, <strong>Daiki Kawasaki</strong>, Ryosuke Nishitsuji, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Microelectronic Engineering 263, 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1016/j.snb.2022.131747" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Au nanorods-TiO<sub>2</sub> photonic crystal plasmonic-photonic hybrid sensor for label-free detection and identification of DNA molecules with single nucleotide polymorphisms</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Sensors and Actuators B: Chemical 361, 2022</p>
+                            </div>
+                            <div>           
+                                <a href="https://doi.org/10.1016/j.rinp.2022.105541" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Wavelength-tunable dual-band edge plasmon mode based on gold edge-hole plasmonic nanostructure</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Results in Physics 37 , 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/bios12040200" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Imprinted Photonic Crystal-Film-Based Smartphone-Compatible Label-Free Optical Sensor for SARS-CoV-2 Testing</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Biosensors 12(4), 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/mi13020257" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Fabrication of Metal-Insulator-Metal Nanostructures Composed of Au-MgF<sub>2</sub>-Au and Its Potential in Responding to Two Different Factors in Sample Solutions Using Individual Plasmon Modes</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Micromachines 13(2), 2022</p>
+                            </div>
+
+
+                            <div>
+                                <a href="https://doi.org/10.1016/j.rinp.2022.105541" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Wavelength-tunable dual-band edge plasmon mode based on gold edge-hole plasmonic nanostructure</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Results in Physics 37 , 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.3390/bios12040200" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Imprinted Photonic Crystal-Film-Based Smartphone-Compatible Label-Free Optical Sensor for SARS-CoV-2 Testing</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Biosensors 12(4), 2022</p>
+                            </div> 
+                                         
+                            <div>
+                                <a href="https://doi.org/10.3390/mi13020257" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong> Fabrication of Metal-Insulator-Metal Nanostructures Composed of Au-MgF<sub>2</sub>-Au and Its Potential in Responding to Two Different Factors in Sample Solutions Using Individual Plasmon Modes</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Micromachines 13(2), 2022</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1541/ieejsmas.142.29" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Fabrication and Characterization of YAG:Ce<sup>3+</sup> Phosphor Powder-Contained Photonic Crystal for Optical Sensor</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Shotaro Ueda, Nao Kobayashi, <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> IEEJ Transactions on Sensors and Micromachines 142(2) 29-30, 2022</p>
+                            </div>      
+                            <div>
+                                <a href="https://doi.org/10.1038/s41598-020-73858-8" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Highly sensitive optical ion sensor with ionic liquid-based colorimetric membrane/photonic crystal hybrid structure</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Ryoutarou Oishi, Nao Kobayashi, Tatsumi Mizuta, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Scientific Reports 10(1), 2020</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.1016/j.snb.2019.126932" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>TiN-contained polymer-metal core-shell structured nanocone array: Engineering of sensor performance by controlling plasmonic properties</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Kenichi Maeno, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Sensors and Actuators, B: Chemical 299, 2019</p>
+                            </div>    
+                            <div>
+                                <a href="https://doi.org/10.1021/acsanm.9b00930" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Core-Shell-Structured Gold Nanocone Array for Label-Free DNA Sensing</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenichi Maeno, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> ACS Applied Nano Materials 2(8) 4983-4990, 2019</p>
+                            </div>
+                            <div>
+                                <a href="https://doi.org/10.2494/photopolymer.32.101" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="text-blue-400 hover:text-blue-300 transition-colors">
+                                    <strong>Au"edged hole array" for sensor application</strong>
+                                </a>
+                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Chigusa Inoue, Kenichi Maeno, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
+                                <p><strong>Journal:</strong> Journal of Photopolymer Science and Technology 32(1) 101-105, 2019</p>
+                            </div> 
+                    </div>
+                </div>
+             <!-- 学会 Section -->
+                <div id="conference" class="grid gap-8">
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                        <div class="space-y-8">  <!-- 各論文エントリー間のスペースを追加 -->
+                            <h2 class="text-2xl font-semibold text-center mb-4">Conference</h2>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">TiO<sub>2</sub>コーティング2次元フォトニック結晶を用いたメチル化DNAのバイサルファイトフリー検出</h3>
+                                <p><strong>Authors:</strong> 中島悠佑, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム 22(1), 2023</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">ナノインプリント製フォトニック結晶を用いたメチル化シトシン検出</h3>
+                                <p><strong>Authors:</strong> 中島悠佑, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 70th, 2023</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">ポリマーフォトニック結晶およびプラズモニック結晶の近接場光学応答評価</h3>
+                                <p><strong>Authors:</strong> 延本美優, <strong>川崎大輝</strong>, 久本秀明, 末吉健志, 遠藤達郎</p>
+                                <p>分析化学討論会講演要旨集(Web) 83rd, 2023</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">プラズモニック/フォトニック複合構造体による高感度DNA解析</h3>
+                                <p><strong>Authors:</strong> <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム学会研究会講演要旨集(CD-ROM) 45th, 2022</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">フォトニック結晶を用いたDNAメチル化解析</h3>
+                                <p><strong>Authors:</strong> 中島悠佑, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム学会研究会講演要旨集(CD-ROM) 46th, 2022</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">広範囲増強電場を有するプラズモニックナノコーンアレイの作製とSERSセンサへの展開</h3>
+                                <p><strong>Authors:</strong> 藤原聡子, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム学会研究会講演要旨集(CD-ROM) 45th, 2022</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">酵素含有刺激応答性ハイドロゲル/フォトニック結晶ハイブリッドの作製とグルコースセンサへの応用</h3>
+                                <p><strong>Authors:</strong> 遠藤達郎, 小林奈緒, <strong>川崎大輝</strong>, 山田大空, 末吉健志, 久本秀明</p>
+                                <p>日本生体医工学会大会プログラム・抄録集(Web) 60th, 2021</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">ポリマー製フォトニック結晶シートを用いたスマートフォンによるSERS-CoV-2スパイクタンパク質の高感度検出</h3>
+                                <p><strong>Authors:</strong> <strong>川崎大輝</strong>, 山田大空, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム学会研究会講演要旨集(CD-ROM) 44th, 2021</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">イオン選択性可塑化PVC複合型プラズモニックイオンセンサの開発</h3>
+                                <p><strong>Authors:</strong> 遠藤達郎, 井上千種, <strong>川崎大輝</strong>, 山田大空, 末吉健志, 久本秀明</p>
+                                <p>センサ・マイクロマシンと応用システムシンポジウム(CD-ROM) 38th, 2021</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">生体分子解析のためのフォトニック結晶/金ナノロッドハイブリッド構造の基礎特性評価</h3>
+                                <p><strong>Authors:</strong> <strong>川崎大輝</strong>, 山田大空, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 67th, 2020</p>
+                            </div>
+
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">高感度蛍光増強型バイオセンシングを志向したTiO<sub>2</sub>/ハイドロゲルハイブリッドフォトニック結晶の作製</h3>
+                                <p><strong>Authors:</strong> 小林奈緒, 志水友哉, <strong>川崎大輝</strong>, 山田大空, 久本秀明, 末吉健志, 遠藤達郎</p>
+                                <p>化学とマイクロ・ナノシステム学会研究会講演要旨集 39th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">超高感度DNA検出を指向した先端開口型プラズモニック結晶の作製</h3>
+                                <p><strong>Authors:</strong> 井上千種, <strong>川崎大輝</strong>, 山田大空, 前野権一, 志水友哉, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 66th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">広域プラズモン増強電場形成能を有するMIMドットアレイの設計と作製</h3>
+                                <p><strong>Authors:</strong> 山田大空, <strong>川崎大輝</strong>, 井上千種, 前野権一, 久本秀明, 末吉健志, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 66th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">TiN-金属/コア-シェルナノコーンアレイ:LSPR特性制御によるセンサ性能向上</h3>
+                                <p><strong>Authors:</strong> <strong>川崎大輝</strong>, 前野権一, 山田大空, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 66th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">フォトニック/プラズモニックナノデバイスのためのモールド形状制御技術の開発</h3>
+                                <p><strong>Authors:</strong> 前野権一, 山田大空, 志水友哉, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>応用物理学会春季学術講演会講演予稿集(CD-ROM) 66th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">広域プラズモン増強電場発生を示すMetal-Insulator-Metalドットアレイの設計と作製</h3>
+                                <p><strong>Authors:</strong> 山田大空, <strong>川崎大輝</strong>, 井上千種, 前野権一, 久本秀明, 末吉健志, 遠藤達郎</p>
+                                <p>応用物理学会秋季学術講演会講演予稿集(CD-ROM) 80th, 2019</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">非標識バイオセンサ応用を指向した金ナノコーンアレイの作製とセンサ感度評価</h3>
+                                <p><strong>Authors:</strong> <strong>川崎大輝</strong>, 山田大空, 前野権一, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>日本分析化学会年会講演要旨集 67th, 2018</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">非標識バイオセンサを指向した先端開口型金ナノ構造の作製と光学特性評価</h3>
+                                <p><strong>Authors:</strong> 井上千種, <strong>川崎大輝</strong>, 山田大空, 前野権一, 末吉健志, 久本秀明, 遠藤達郎</p>
+                                <p>日本分析化学会年会講演要旨集 67th, 2018</p>
+                            </div>
+                            <div>
+                                <h3 class="text-1g font-bold mb-2">ナノ猫の手アレイ:（第11回JSAPフォト&イラストコンテスト優秀賞受賞作品）</h3>
+                                <p><strong>Authors:</strong> 山田 大空, 前野 権一, <strong>川崎 大輝</strong>, 志水 友哉, 遠藤 達郎</p>
+                                <p>応用物理 87(9) 637-637, 2018</p>
+                            </div>
+                           
+                    </div>
+                    </div>
+                </section>
+        </div>
+    </main>
+      <!-- Footer with Social Media Icons -->
+<footer class="bg-black py-8">
+    <div class="max-w-7xl mx-auto px-4">
+       
+        
+        <div class="text-center mt-4">
+            <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

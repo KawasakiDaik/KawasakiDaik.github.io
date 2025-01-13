@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="author" content="川﨑 大輝" />
+        <title>川﨑 大輝 -KAWASAKI Daiki-</title>
+        <!-- Favicon-->
+        <link rel="icon" href="assets/favicon.ico" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+        <style>
+            .backdrop-blur-md {
+                backdrop-filter: blur(12px);
+            }
+            .gradient-text {
+                background: linear-gradient(to right, #60A5FA 48%, #A855F7 60%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        </style>
+    </head>
+<body class="min-h-screen bg-black text-white">
+     <!-- Navigation -->
+<nav class="w-full bg-black/80 backdrop-blur-md relative">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <a href="index.html#home" class="text-3xl font-bold text-white">
+                KAWASAKI Daiki
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
+                
+                <!-- Research Dropdown -->
+                <div class="relative group">
+                    <!-- Link to research.html -->
+                    <a href="research.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                        RESEARCH
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <!-- Dropdown menu -->
+                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                        <div class="py-1">
+                            <a href="research.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
+                            <a href="research.html#achievements" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Achievements</a>
+                            <a href="research.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Art Dropdown -->
+                <div class="relative group">
+                    <!-- Link to art.html -->
+                    <a href="art.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                        ART
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <!-- Dropdown menu -->
+                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                        <div class="py-1">
+                            <a href="art.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
+                            <a href="art.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
+                            <a href="art.html#works" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Works</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+            </div>   
+        </div>
+    </div>   
+
+    <!-- Mobile Menu Button -->
+    <button class="absolute top-4 right-4 md:hidden" id="menuButton">
+        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+        </svg>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden bg-black">
+        <div class="px-4 py-4 space-y-4">
+            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+            <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
+            
+            <!-- Mobile Research Submenu -->
+            <div class="space-y-1">
+                <a href="research.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="researchSubmenu" data-icon="researchIcon">
+                    RESEARCH
+                    <svg id="researchIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                <div id="researchSubmenu" class="hidden pl-4 space-y-2">
+                    <a href="research.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                    <a href="research.html#achievements" class="block text-sm text-gray-300 hover:text-white">Achievements</a>
+                    <a href="research.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                </div>
+            </div>
+
+            <!-- Mobile Art Submenu -->
+            <div class="space-y-1">
+                <a href="art.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="artSubmenu" data-icon="artIcon">
+                    ART
+                    <svg id="artIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                <div id="artSubmenu" class="hidden pl-4 space-y-2">
+                    <a href="art.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                    <a href="art.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                    <a href="art.html#works" class="block text-sm text-gray-300 hover:text-white">Works</a>
+                </div>
+            </div>
+
+            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+       // Toggle dropdown menus
+        document.querySelectorAll('[data-toggle="dropdown"]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // デフォルトの挙動を停止
+                
+                const targetId = link.getAttribute('data-target');
+                const iconId = link.getAttribute('data-icon');
+                const submenu = document.getElementById(targetId);
+                const icon = document.getElementById(iconId);
+
+                // クリックした要素がアイコン（SVG）またはそのパスの場合
+                if (event.target.tagName === 'svg' || event.target.tagName === 'path') {
+                    // サブメニューの表示切り替えのみ
+                    submenu.classList.toggle('hidden');
+                    
+                    // アイコンの回転
+                    if (submenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                } else {
+                    // アイコン以外をクリックした場合は、リンク先に遷移
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+    </script>
+</nav>
+    <main class="pt-24 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-5xl font-bold mb-16 text-center gradient-text">ART</h1>
+
+            <!-- Overview -->
+            <section id=overview class="mb-20">
+                <h2 class="text-3xl font-semibold text-center mb-8">Overview</h2>
+                <div class="bg-gray-900 p-8 rounded-2xl">
+                    <p class="text-gray-300 leading-relaxed">
+                        「光化する自然」を思惟し，その像を映し出す．光と物質，無質量と質量，偏在と局在，その間にある哀惜や相和を反芻する．また，その自然で形成される生命系 - 変容する「意識」と「感覚」- を追究する．この自然では，生命・自然・計算機は光により融和し，時空間に遍在する．音声・映像・マテリアル，種々のメディアを用いた創作と表現を通して，光化する自然の様相を描写し，変容する生命系を構築する．
+                    </p>
+                </div>
+            </section>
+
+            <!-- Projects -->
+                <section id="projects" class="mb-20">
+                    <h2 class="text-3xl font-semibold text-center mb-8">Projects</h2>
+                    <div class="bg-gray-900 p-8 rounded-2xl">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- 左側テキスト -->
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-center mb-4">AI'm</h3>
+                                <h4 class="text-xl font-medium text-center mb-4">「光化する意識・質量のない自然」</h4>
+                                <p class="text-gray-300 text-left mb-4">
+                                    AI'mは,境界なき空間に偏在する主体（私=意識）として,人間,自然,AIが融合して制作するアートプロジェクトです.
+                                    固定された「作者」という概念を離れ,輪郭を持たない「主体の空間」そのものから生じる創作活動を行います.
+                                    私たち,あなた,自然,AIー主体の空間と,音楽,映像,詩といったメディアの結び付きによるアートを通して,
+                                    光化して遍在する意識の有り様を探求します.
+                                </p>
+                            </div>
+                            <!-- 右側画像 -->
+                            <div class="relative flex items-center justify-center">
+                                <div class="w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 p-1">
+                                    <img
+                                        src="assets/homeimage.png"
+                                        alt="Image"
+                                        class="w-full h-full object-cover rounded-3xl"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            <!-- Works -->
+            <section id=works class="mb-20">
+                <h2 class="text-3xl font-semibold text-center mb-8">Works</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- 動画作品 1 -->
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                            <h3 class="text-xl font-medium text-center mb-4">AI'm - 音霧を歩く</h3>
+                            <p class="text-gray-300 mb-4">
+                                
+                            </p>
+                            <!-- YouTube埋め込み -->
+                            <div class="h-96 rounded-lg overflow-hidden max-w-4xl mx-auto">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/t3ErZeMVyy8" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen 
+                                    class="w-full h-full">
+                                </iframe>
+                            </div>
+                        </div>
+                        <!-- 動画作品 2 -->
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                            <h3 class="text-xl font-medium text-center mb-4">AI'm - ポップ・ループ</h3>
+                            <p class="text-gray-300 mb-4">
+                
+                            </p>
+                            <!-- YouTube埋め込み -->
+                            <div class="h-96 rounded-lg overflow-hidden max-w-4xl mx-auto">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/mjeBKfG93j8" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen 
+                                    class="w-full h-full">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+
+
+      <!-- Footer with Social Media Icons -->
+<footer class="bg-black py-8">
+    <div class="max-w-7xl mx-auto px-4">
+       
+        
+        <div class="text-center mt-4">
+            <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
