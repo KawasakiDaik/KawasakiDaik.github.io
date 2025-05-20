@@ -428,15 +428,16 @@
      <!-- Main Contents -->
     <main>
         <section id="home" class="flex items-center justify-center min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900 relative">
-            <div style="width:900px; height:507px;" class="rounded-2xl overflow-hidden shadow-lg bg-black/70 flex items-center justify-center">
+            <div class="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black/70">
                 <video
-                id="videoSlideshow"
-                style="width:100%; height:100%; object-fit:cover;"
-                autoplay
-                muted
-                playsinline
-              ></video>
-            </div>
+                  id="videoSlideshow"
+                  class="w-full h-auto"
+                  autoplay
+                  muted
+                  playsinline
+                  loop
+                ></video>
+              </div>
             <!-- スクロール案内 -->
             <div id="scrollHint"
               class="fixed bottom-6 right-6 bg-black/70 text-white px-4 py-2 rounded-xl shadow-lg text-sm flex items-center gap-2 animate-fade-in-up z-50">
