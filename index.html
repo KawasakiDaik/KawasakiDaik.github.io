@@ -809,17 +809,23 @@
                     loadingScreen.style.display = 'none';
                     mainContent.classList.add('loaded');
                 }
-
-                // ここで .fade-element に .visible を即座に付与（全部一気に表示する場合）
+        
+                // ここで .fade-element に .visible を即座に付与
                 document.querySelectorAll('.fade-element').forEach(el => {
                     el.classList.add('visible');
                 });
-
-                // #contact へスクロール
+        
+                // ハッシュからスクロール先IDを決める
                 setTimeout(() => {
-                    const contact = document.getElementById('contact');
-                    if (contact) {
-                        contact.scrollIntoView({behavior: "smooth", block: "start"});
+                    let hash = window.location.hash.replace('#', '').trim().toLowerCase();
+                    if (hash) {
+                        // homeやcontactどちらでもOK（大文字小文字も気にしない）
+                        if (hash === 'home' || hash === 'contact') {
+                            const target = document.getElementById(hash);
+                            if (target) {
+                                target.scrollIntoView({behavior: "smooth", block: "start"});
+                            }
+                        }
                     }
                 }, 100);
                 return;
@@ -828,6 +834,7 @@
             window.loadingController = new LoadingController();
             console.log('川﨑大輝公式サイト - 拡張版が読み込まれました');
         });
+
 
         
         // グローバル関数
