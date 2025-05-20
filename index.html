@@ -424,6 +424,43 @@
                 <a href="index.html?skiploading=true#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
             </div>
         </div>
+        <script>
+        // Toggle mobile menu
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+       // Toggle dropdown menus
+        document.querySelectorAll('[data-toggle="dropdown"]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // デフォルトの挙動を停止
+                
+                const targetId = link.getAttribute('data-target');
+                const iconId = link.getAttribute('data-icon');
+                const submenu = document.getElementById(targetId);
+                const icon = document.getElementById(iconId);
+
+                // クリックした要素がアイコン（SVG）またはそのパスの場合
+                if (event.target.tagName === 'svg' || event.target.tagName === 'path') {
+                    // サブメニューの表示切り替えのみ
+                    submenu.classList.toggle('hidden');
+                    
+                    // アイコンの回転
+                    if (submenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                } else {
+                    // アイコン以外をクリックした場合は、リンク先に遷移
+                    window.location.href = link.getAttribute('href');
+                }
+            });
+        });
+    </script>  
     </nav>
      <!-- Main Contents -->
     <main>
