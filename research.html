@@ -23,6 +23,96 @@
                 background-clip: text;
                 color: transparent;
             }
+
+        /* アニメーション定義 */
+        @keyframes gradientShift {
+                0% { background: linear-gradient(to right, #60A5FA, #A855F7); }
+                100% { background: linear-gradient(to right, #A855F7, #60A5FA, #F59E0B); }
+            }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* アニメーションクラス */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .animate-pulse-custom {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        /* 初期状態を非表示にする */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         </style>
     </head>
     <!-- Google tag (gtag.js) -->
@@ -47,7 +137,7 @@
 
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                <a href="index.html#home" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
                 <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
                 
                 <!-- Research Dropdown -->
@@ -88,7 +178,7 @@
                     </div>
                 </div>
 
-                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+                <a href="index.html?skiploading=true#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
             </div>   
         </div>
     </div>   
@@ -103,7 +193,7 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden bg-black">
         <div class="px-4 py-4 space-y-4">
-            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+            <a href="index.html#home" class="block text-sm text-gray-300 hover:text-white">HOME</a>
             <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
             
             <!-- Mobile Research Submenu -->
@@ -136,7 +226,7 @@
                 </div>
             </div>
 
-            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+            <a href="index.html?skiploading=true#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
         </div>
     </div>
 
@@ -185,12 +275,12 @@
 
             <!-- Overview -->
             <section id="overview" class="mb-20">
-                <h2 class="text-3xl font-semibold text-center mb-8">Overview</h2>
-                <div class="bg-gray-900 p-8 rounded-2xl">
+                <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Overview</h2>
+                <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                     <p class="text-gray-300 leading-relaxed mb-4">
                         目には見えない，耳には聞こえない，知覚や伝達が困難な生命・環境の物質的情報を「光」に変換し，光通信網と計算機を介してリアルタイムで相互作用できるシステムを追究する．このシステムの核になる物質–光変換技術を実現するため，人工ナノ構造により光を自在に操作する技術「メタフォトニクス」を応用して，微小・微量の物質に応答するマイクロセンサ，微小・微量のエネルギー変化で光信号を変調するマイクロアクチュエータを開発する．これらのマイクロデバイスと人工知能の協奏により，物質情報をリアルタイムに解析・制御し，生命や環境の動的調和を導くシステム－光を介して調和する生命・環境「光化する自然」－の実現を目指す．    
                     </p>
-                    <div class="flex flex-col items-center space-y-0">
+                    <div class="flex flex-col items-center space-y-0 fade-element">
                         <a href="https://researchmap.jp/daiki_k/?lang=ja" 
                         target="_blank" 
                         rel="noopener" 
@@ -208,9 +298,9 @@
             </section>
             <!-- Projects -->
             <section id="projects" class="mb-20">
-            <h2 class="text-3xl font-semibold text-center mb-8">Projects</h2>
+            <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Projects</h2>
                 <div class="grid gap-8">
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                         <h3 class="text-xl font-medium text-center mb-4">1.ナノフォトニックバイオ/化学センサ</h3>
                         <div class="grid md:grid-cols-2 gap-8">
                             <!-- 左側テキスト -->
@@ -231,7 +321,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                         <h3 class="text-xl font-medium text-center mb-4">2. ピクセルイメージングバイオセンサ</h3>
                         <div class="grid md:grid-cols-2 gap-8">
                             <!-- 左側テキスト -->
@@ -252,7 +342,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                         <h3 class="text-xl font-medium text-center mb-4">3. バイオアクティブアクチュエータ</h3>
                         <div class="grid md:grid-cols-2 gap-8">
                             <!-- 左側テキスト -->
@@ -278,9 +368,9 @@
             
             <!-- Achievements -->
             <section id="achievements" class="mb-20">
-                <h2 class="text-3xl font-semibold text-center mb-8">Achievements</h2>
+                <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Achievements</h2>
                 <div class="grid gap-8">
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                     <!-- 論文Section -->
                         <div id=publication class="space-y-8">  <!-- 各論文エントリー間のスペースを追加 -->
                             <h2 class="text-2xl font-semibold text-center mb-4">Publication</h2>
@@ -394,8 +484,6 @@
                                 <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
                                 <p><strong>Journal:</strong> Micromachines 13(2), 2022</p>
                             </div>
-
-
                             <div>
                                 <a href="https://doi.org/10.1016/j.rinp.2022.105541" 
                                    target="_blank" 
@@ -416,17 +504,7 @@
                                 <p class="mt-2"><strong>Authors:</strong> <strong>Daiki Kawasaki</strong>, Hirotaka Yamada, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
                                 <p><strong>Journal:</strong> Biosensors 12(4), 2022</p>
                             </div> 
-                                         
-                            <div>
-                                <a href="https://doi.org/10.3390/mi13020257" 
-                                   target="_blank" 
-                                   rel="noopener" 
-                                   class="text-blue-400 hover:text-blue-300 transition-colors">
-                                    <strong> Fabrication of Metal-Insulator-Metal Nanostructures Composed of Au-MgF<sub>2</sub>-Au and Its Potential in Responding to Two Different Factors in Sample Solutions Using Individual Plasmon Modes</strong>
-                                </a>
-                                <p class="mt-2"><strong>Authors:</strong> Hirotaka Yamada, <strong>Daiki Kawasaki</strong>, Kenji Sueyoshi, Hideaki Hisamoto, Tatsuro Endo</p>
-                                <p><strong>Journal:</strong> Micromachines 13(2), 2022</p>
-                            </div>
+                           
                             <div>
                                 <a href="https://doi.org/10.1541/ieejsmas.142.29" 
                                    target="_blank" 
@@ -481,9 +559,9 @@
                 </div>
              <!-- 学会 Section -->
                 <div id="conference" class="grid gap-8">
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                         <div class="space-y-8">  <!-- 各論文エントリー間のスペースを追加 -->
-                            <h2 class="text-2xl font-semibold text-center mb-4">Conference</h2>
+                            <h2 class="text-2xl font-semibold text-center mb-4 fade-element">Conference</h2>
                             <div>
                                 <h3 class="text-1g font-bold mb-2">TiO<sub>2</sub>コーティング2次元フォトニック結晶を用いたメチル化DNAのバイサルファイトフリー検出</h3>
                                 <p><strong>Authors:</strong> 中島悠佑, <strong>川崎大輝</strong>, 末吉健志, 久本秀明, 遠藤達郎</p>
@@ -605,5 +683,27 @@
         </div>
     </div>
 </footer>
+<script>
+    // IntersectionObserverを使ったfade-in処理
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+    
+      document.querySelectorAll('.fade-element').forEach(el => {
+        observer.observe(el);
+      });
+    });
+    </script>
+    
 </body>
 </html>

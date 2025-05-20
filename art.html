@@ -22,6 +22,96 @@
                 background-clip: text;
                 color: transparent;
             }
+        
+        /* アニメーション定義 */
+        @keyframes gradientShift {
+                0% { background: linear-gradient(to right, #60A5FA, #A855F7); }
+                100% { background: linear-gradient(to right, #A855F7, #60A5FA, #F59E0B); }
+            }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* アニメーションクラス */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .animate-pulse-custom {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        /* 初期状態を非表示にする */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         </style>
     </head>
     <!-- Google tag (gtag.js) -->
@@ -46,7 +136,7 @@
 
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                <a href="index.html#home" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
                 <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
                 
                 <!-- Research Dropdown -->
@@ -87,7 +177,7 @@
                     </div>
                 </div>
 
-                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+                <a href="index.html?skiploading=true#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
             </div>   
         </div>
     </div>   
@@ -102,7 +192,7 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden bg-black">
         <div class="px-4 py-4 space-y-4">
-            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+            <a href="index.html#home" class="block text-sm text-gray-300 hover:text-white">HOME</a>
             <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
             
             <!-- Mobile Research Submenu -->
@@ -135,7 +225,7 @@
                 </div>
             </div>
 
-            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+            <a href="index.html?skiploading=true#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
         </div>
     </div>
 
@@ -183,8 +273,8 @@
 
             <!-- Overview -->
             <section id=overview class="mb-20">
-                <h2 class="text-3xl font-semibold text-center mb-8">Overview</h2>
-                <div class="bg-gray-900 p-8 rounded-2xl">
+                <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Overview</h2>
+                <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                     <p class="text-gray-300 leading-relaxed">
                         「光化する自然」を思惟し，その像を映し出す．光と物質，無質量と質量，遍在と偏在，その間にある哀惜や相和を反芻する．また，その自然で形成される生命系 - 変容する「意識」と「感覚」- を追究する．この自然では，生命・環境・計算機は光により調和し，時空間に遍在する．音声・映像・マテリアル，種々のメディアを用いた創作と表現を通して，光化する自然の様相を描写し，変容する生命系を構築する．
                     </p>
@@ -193,8 +283,8 @@
 
             <!-- Projects -->
                 <section id="projects" class="mb-20">
-                    <h2 class="text-3xl font-semibold text-center mb-8">Projects</h2>
-                    <div class="bg-gray-900 p-8 rounded-2xl">
+                    <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Projects</h2>
+                    <div class="bg-gray-900 p-8 rounded-2xl fade-element">
                         <div class="grid md:grid-cols-2 gap-8">
                             <!-- 左側テキスト -->
                             <div class="text-center">
@@ -224,10 +314,10 @@
 
             <!-- Works -->
             <section id=works class="mb-20">
-                <h2 class="text-3xl font-semibold text-center mb-8">Works</h2>
+                <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Works</h2>
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
                          <!-- 動画作品 6 -->
-                         <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                         <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">春の空</h3>
                             <p class="text-gray-300 mb-4">
                                 
@@ -245,7 +335,7 @@
                             </div>
                         </div>
                         <!-- 動画作品 5 -->
-                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">AI'm - 春を辿る</h3>
                             <p class="text-gray-300 mb-4">
                                 
@@ -265,7 +355,7 @@
                     </div>    
                      <div class="grid md:grid-cols-2 gap-4 mb-4">
                         <!-- 動画作品 4-->
-                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">AI'm - 無音のフロア</h3>
                             <p class="text-gray-300 mb-4">
             
@@ -284,7 +374,7 @@
                         </div>  
                 
                         <!-- 動画作品 3-->
-                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">AI'm - 白銀ダンス</h3>
                             <p class="text-gray-300 mb-4">
                                 
@@ -304,7 +394,7 @@
                     </div>   
                      <div class="grid md:grid-cols-2 gap-4 mb-4">
                         <!-- 動画作品 2 -->
-                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">AI'm - ポップ・ループ</h3>
                             <p class="text-gray-300 mb-4">
                 
@@ -322,7 +412,7 @@
                             </div>
                         </div>
                         <!-- 動画作品 1 -->
-                        <div class="bg-gray-900 p-8 rounded-2xl mb-4">
+                        <div class="bg-gray-900 p-8 rounded-2xl mb-4 fade-element">
                             <h3 class="text-xl font-medium text-center mb-4">AI'm - 音霧を歩く</h3>
                             <p class="text-gray-300 mb-4">
                                 
@@ -359,5 +449,28 @@
         </div>
     </div>
 </footer>
+<script>
+    // IntersectionObserverを使ったfade-in処理
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+    
+      document.querySelectorAll('.fade-element').forEach(el => {
+        observer.observe(el);
+      });
+    });
+    </script>
+    
+
 </body>
 </html>

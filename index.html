@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    </div> <!-- main-content 終了タグ --><!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -10,10 +10,21 @@
     <meta name="author" content="川崎 大輝" />
     <meta name="author" content="Daiki Kawasaki" />
     <title>川﨑大輝-公式ウェブサイト / Daiki KAWASAKI-Official Site</title>
+   
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4MVF6FSQM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4MVF6FSQM');
+    </script>
+
     <!-- Favicon-->
     <link rel="icon" href="assets/favicon.ico" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <style>
+        <style>
         .backdrop-blur-md {
             backdrop-filter: blur(12px);
         }
@@ -21,333 +32,899 @@
             background: linear-gradient(to right, #60A5FA, #A855F7);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            color:  transparent;
+            animation: gradientShift 3s ease-in-out infinite alternate;
+        }
+
+        /* ローディング画面のスタイル */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000, #1a1a2e, #16213e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .loading-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .loading-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .loading-description {
+            font-size: 1rem;
+            color: #9CA3AF;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+        }
+
+        .loading-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .loading-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #60A5FA;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #60A5FA;
+            animation: particleMove 4s infinite linear;
+        }
+
+        .loading-progress {
+            width: 100%;
+            max-width: 400px; 
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1px;
+            overflow: hidden;
+            margin-top: 2rem auto 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+            display: block;
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #60A5FA, #A855F7);
+            border-radius: 1px;
+            width: 0%;
+            animation: progressLoad 2s ease-out 2.5s forwards;
+        }
+
+
+        /* メインコンテンツの初期状態 */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .main-content.loaded {
+            opacity: 1;
+        }
+        /* アニメーション定義 */
+        @keyframes gradientShift {
+                0% { background: linear-gradient(to right, #60A5FA, #A855F7); }
+                100% { background: linear-gradient(to right, #A855F7, #60A5FA, #F59E0B); }
+            }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* アニメーションクラス */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .animate-pulse-custom {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* ホバーエフェクト */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* パーティクル背景 */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: #60A5FA;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: particleMove 6s infinite linear;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes typeWriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes textFocus {
+            0% {
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+
+        /* 初期状態を非表示にする */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R4MVF6FSQM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-R4MVF6FSQM');
-</script>
 <body class="min-h-screen bg-black text-white">
-   
-     <!-- Navigation -->
-<nav class="w-full bg-black/80 backdrop-blur-md relative">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <a href="index.html#home" class="text-3xl font-bold text-white">
+    <!-- ローディング画面 -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-particles" id="loadingParticles"></div>
+        
+        <div class="loading-content">
+            <h1 class="loading-title gradient-text">
+                川﨑 大輝
+            </h1>
+            <h2 class="loading-subtitle text-white">
                 KAWASAKI Daiki
-            </a>
-
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
-                <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
-                
-                <!-- Research Dropdown -->
-                <div class="relative group">
-                    <!-- Link to research.html -->
-                    <a href="research.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
-                        RESEARCH
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </a>
-                    <!-- Dropdown menu -->
-                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
-                        <div class="py-1">
-                            <a href="research.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
-                            <a href="research.html#achievements" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Achievements</a>
-                            <a href="research.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Art Dropdown -->
-                <div class="relative group">
-                    <!-- Link to art.html -->
-                    <a href="art.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
-                        ART
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </a>
-                    <!-- Dropdown menu -->
-                    <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
-                        <div class="py-1">
-                            <a href="art.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Overview</a>
-                            <a href="art.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Projects</a>
-                            <a href="art.html#works" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white">Works</a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
-            </div>   
-        </div>
-    </div>   
-
-    <!-- Mobile Menu Button -->
-    <button class="absolute top-4 right-4 md:hidden" id="menuButton">
-        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
-        </svg>
-    </button>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden bg-black">
-        <div class="px-4 py-4 space-y-4">
-            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
-            <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
-            
-            <!-- Mobile Research Submenu -->
-            <div class="space-y-1">
-                <a href="research.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="researchSubmenu" data-icon="researchIcon">
-                    RESEARCH
-                    <svg id="researchIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </a>
-                <div id="researchSubmenu" class="hidden pl-4 space-y-2">
-                    <a href="research.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
-                    <a href="research.html#achievements" class="block text-sm text-gray-300 hover:text-white">Achievements</a>
-                    <a href="research.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
-                </div>
+            </h2>
+            <p class="loading-description">
+                光を介して調和する生命・自然・計算機<br>
+                Harmonizing Life, Nature, and Computers through Light
+            </p>
+            <div class="loading-progress">
+                <div class="loading-progress-bar"></div>
             </div>
-
-            <!-- Mobile Art Submenu -->
-            <div class="space-y-1">
-                <a href="art.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="artSubmenu" data-icon="artIcon">
-                    ART
-                    <svg id="artIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </a>
-                <div id="artSubmenu" class="hidden pl-4 space-y-2">
-                    <a href="art.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
-                    <a href="art.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
-                    <a href="art.html#works" class="block text-sm text-gray-300 hover:text-white">Works</a>
-                </div>
-            </div>
-
-            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
         </div>
     </div>
 
-    <script>
-        // Toggle mobile menu
-        const menuButton = document.getElementById('menuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+    <!-- メインコンテンツ -->
+    <div class="main-content" id="mainContent">
+  
+    <!-- Navigation -->
+    <nav class="w-full bg-black/80 backdrop-blur-md relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html#home" class="text-3xl font-bold text-white animate-fade-in-left">
+                    KAWASAKI Daiki
+                </a>
 
-       // Toggle dropdown menus
-        document.querySelectorAll('[data-toggle="dropdown"]').forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault(); // デフォルトの挙動を停止
-                
-                const targetId = link.getAttribute('data-target');
-                const iconId = link.getAttribute('data-icon');
-                const submenu = document.getElementById(targetId);
-                const icon = document.getElementById(iconId);
-
-                // クリックした要素がアイコン（SVG）またはそのパスの場合
-                if (event.target.tagName === 'svg' || event.target.tagName === 'path') {
-                    // サブメニューの表示切り替えのみ
-                    submenu.classList.toggle('hidden');
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8 animate-fade-in-right">
+                    <a href="index.html#home" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                    <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
                     
-                    // アイコンの回転
-                    if (submenu.classList.contains('hidden')) {
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        icon.style.transform = 'rotate(180deg)';
-                    }
-                } else {
-                    // アイコン以外をクリックした場合は、リンク先に遷移
-                    window.location.href = link.getAttribute('href');
-                }
-            });
-        });
-    </script>
-</nav>
+                    <!-- Research Dropdown -->
+                    <div class="relative group">
+                        <a href="research.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                            RESEARCH
+                            <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                            <div class="py-1">
+                                <a href="research.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Overview</a>
+                                <a href="research.html#achievements" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Achievements</a>
+                                <a href="research.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Projects</a>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Art Dropdown -->
+                    <div class="relative group">
+                        <a href="art.html" class="text-sm text-gray-300 group-hover:text-white transition-colors py-2 flex items-center">
+                            ART
+                            <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-black/90 rounded-md shadow-lg overflow-hidden transform scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out z-50">
+                            <div class="py-1">
+                                <a href="art.html#overview" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Overview</a>
+                                <a href="art.html#projects" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Projects</a>
+                                <a href="art.html#works" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">Works</a>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- Main Content -->
-<main>
-    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
-        <div class="max-w-screen-xl mx-auto px-6 sm:px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-                <!-- 左側テキスト -->
-                <div class="text-left">
-                    <h1 class="text-6xl font-bold mb-5 gradient-text">
-                        川﨑 大輝
-                    </h1>
-                    <h1 class="text-4xl mb-6 gradient-text">
-                        KAWASAKI Daiki
-                    </h1>
-                    <p class="text-xl text-gray-300 mb-8">
-                        Ph.D. (工学), Researcher (RIKEN / SPDR), Artist (AI'm)
-                    </p>
+                    <a href="index.html?skiploading=true#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+                </div>   
+            </div>
+        </div>   
+
+        <!-- Mobile Menu Button -->
+        <button class="absolute top-4 right-4 md:hidden transition-transform hover:scale-110" id="menuButton">
+            <svg class="h-6 w-6 text-white transition-transform" id="menuIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+            </svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden bg-black">
+            <div class="px-4 py-4 space-y-4">
+                <a href="index.html#home" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+                <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
+                
+                <!-- Mobile Research Submenu -->
+                <div class="space-y-1">
+                    <a href="research.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="researchSubmenu" data-icon="researchIcon">
+                        RESEARCH
+                        <svg id="researchIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div id="researchSubmenu" class="hidden pl-4 space-y-2">
+                        <a href="research.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                        <a href="research.html#achievements" class="block text-sm text-gray-300 hover:text-white">Achievements</a>
+                        <a href="research.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                    </div>
                 </div>
-                <!-- 右側画像 -->
-                <div class="relative flex items-center justify-center">
-                    <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 p-1"
-                         style="max-width: 100%; width: 100%; max-width: 375px; height: auto;">
-                        <img
-                            src="assets/profile.png"
-                            alt="Profile"
-                            class="w-full h-auto object-cover rounded-3xl"
-                        />
+
+                <!-- Mobile Art Submenu -->
+                <div class="space-y-1">
+                    <a href="art.html" class="flex items-center justify-between w-full text-sm text-gray-300 hover:text-white" data-toggle="dropdown" data-target="artSubmenu" data-icon="artIcon">
+                        ART
+                        <svg id="artIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div id="artSubmenu" class="hidden pl-4 space-y-2">
+                        <a href="art.html#overview" class="block text-sm text-gray-300 hover:text-white">Overview</a>
+                        <a href="art.html#projects" class="block text-sm text-gray-300 hover:text-white">Projects</a>
+                        <a href="art.html#works" class="block text-sm text-gray-300 hover:text-white">Works</a>
+                    </div>
+                </div>
+
+                <a href="index.html?skiploading=true#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+     <!-- Main Contents -->
+    <main>
+        <section id="home" class="flex items-center justify-center min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900 relative">
+            <div style="width:900px; height:507px;" class="rounded-2xl overflow-hidden shadow-lg bg-black/70 flex items-center justify-center">
+                <video
+                id="videoSlideshow"
+                style="width:100%; height:100%; object-fit:cover;"
+                autoplay
+                muted
+                playsinline
+              ></video>
+            </div>
+            <!-- スクロール案内 -->
+            <div id="scrollHint"
+              class="fixed bottom-6 right-6 bg-black/70 text-white px-4 py-2 rounded-xl shadow-lg text-sm flex items-center gap-2 animate-fade-in-up z-50">
+              <svg class="w-5 h-5 text-blue-400 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+              Scroll
+            </div>
+          </section>
+          
+    </main>      
+      <style>
+        .scroll-hint-hide {
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.7s;
+        }
+        </style>
+    <!-- Overview -->
+    <section id="research-overview" class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-white mb-8 fade-element">「光を介して調和する生命・自然・計算機」</h2>
+            <p class="text-center text-gray-300 mb-6 fade-element">
+                物質により構成される生命・自然・計算機が，光（電磁場）を介して自在に相互作用し，調和する世界を探求する.
+            </p>        
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+               <!-- Research item -->
+                <div class="fade-element">
+                    <a href="research.html" class="block">
+                        <div class="bg-gray-800 shadow-md rounded-lg p-6  hover:bg-gray-700 transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-800 hover:to-blue-900">
+                            <h3 class="text-xl font-bold text-white text-center mb-2">RESEARCH</h3>
+                            <p class="text-gray-400 max-w-md mx-auto">光を自在に操作する技術「メタフォトニクス」を応用した光-生体間の情報交換技術を構築する．</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="fade-element">
+                    <a href="art.html" class="block">
+                        <div class="bg-gray-800 shadow-md rounded-lg p-6  hover:bg-gray-700 transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-800 hover:to-purple-900">
+                            <h3 class="text-xl font-bold text-white text-center mb-2">ART</h3>
+                            <p class="text-gray-400 max-w-md mx-auto">芸術，創作を通して，光で調和する自然の構築を目指すとともに，その世界観を模索，探求する．</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-white mb-8 fade-element">News</h2>
+            <div class="bg-gray-800 rounded-lg p-6 hover-lift fade-element">
+                <ul class="space-y-4">
+                    <li class="text-gray-300 hover:text-purple-400 transition-colors animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <span class="inline-block w-24 text-gray-500">2025.04.26</span>
+                        <a href="art.html#works" class="hover:text-blue-400 transition-colors">新しい作品をアップしました.</a>
+                    </li>
+                    <li class="text-gray-300 hover:text-blue-400 transition-colors animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <span class="inline-block w-24 text-gray-500">2025.04.24</span>
+                        <a href="research.html#publication" class="hover:text-blue-400 transition-colors">論文が『scientific reports』に掲載されました.</a>
+                    </li>
+                    <li class="text-gray-300 hover:text-white transition-colors animate-fade-in-up">
+                        <span class="inline-block w-24 text-gray-500">2025.01.13</span>
+                        <a class="text-gray-300 hover:text-gray-300 cursor-default">ホームページを立ち上げました.</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black text-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8 fade-element">Contact</h2>
+            <!-- Contact Information -->
+            <div class="space-y-8">
+                <div>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 fade-element">
+                            <svg class="w-6 h-6 text-blue-500 mt-1 animate-pulse-custom" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Email</h3>
+                                <p class="text-gray-400">daiki.kawasaki@riken.jp</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 fade-element">
+                            <svg class="w-6 h-6 text-blue-500 mt-1 animate-pulse-custom" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">所在地</h3>
+                                <p class="text-gray-400">〒351-0198</p>
+                                <p class="text-gray-400">埼玉県和光市広沢2-1</p>
+                                <p class="text-gray-400">理化学研究所 光量子工学研究センター</p>
+                                <p class="text-gray-400">メタフォトニクス研究チーム</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-</main>
 
- <!-- Overview -->
-<section id="research-overview" class="py-20 px-4 bg-black">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-white mb-8">「光を介して調和する生命・自然・計算機」</h2>
-        <p class="text-center text-gray-300 mb-6">
-            物質により構成される生命・自然・計算機が，光（電磁場）を介して自在に相互作用し，調和する世界を探求する.
-        </p>        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-           <!-- Example item -->
-            <a href="research.html" class="block">
-                <div class="bg-gray-800 shadow-md rounded-lg p-6 hover:bg-gray-700 transition">
-                    <h3 class="text-xl font-bold text-white text-center mb-2">RESEARCH</h3>
-                    <p class="text-gray-400 max-w-md mx-auto">光を自在に操作する技術「メタフォトニクス」を応用した光-生体間の情報交換技術を構築する．</p>
-                </div>
-            </a>
-
-            <a href="art.html" class="block">
-                <div class="bg-gray-800 shadow-md rounded-lg p-6 hover:bg-gray-700 transition">
-                    <h3 class="text-xl font-bold text-white text-center mb-2">ART</h3>
-                    <p class="text-gray-400 max-w-md mx-auto">芸術，創作を通して，光で調和する自然の構築を目指すとともに，その世界観を模索，探求する．</p>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- News Section -->
-<section id="news" class="py-20 px-4 bg-black">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-white mb-8">News</h2>
-        <div class="bg-gray-800 rounded-lg p-6">
-            <ul class="space-y-4">
-                <li class="text-gray-300">
-                    <span class="inline-block w-24 text-gray-500">2025.04.26</span>
-                    <a href="art.html#works" class="hover:text-blue-400 transition-colors">新しい作品をアップしました.</a>
-                </li>
-                <li class="text-gray-300">
-                    <span class="inline-block w-24 text-gray-500">2025.04.24</span>
-                    <a href="research.html#publication" class="hover:text-blue-400 transition-colors">論文が『scientific reports』に掲載されました.</a>
-                </li>
+    <!-- Footer with Social Media Icons -->
+    <footer class="bg-black py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center space-x-6 fade-element">
+                <!-- YouTube Icon -->
+                <a href="https://www.youtube.com/@im_daik" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-600 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
                 
-                <li class="text-gray-300">
-                    <span class="inline-block w-24 text-gray-500">2025.01.13</span>
-                    <a class="hover:text-blue-400 transition-colors">ホームページを立ち上げました.</a>
-                 </li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black text-white">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-8">Contact</h2>
-        <!-- Contact Information -->
-        <div class="space-y-8">
-            <div>
-                <div class="space-y-6">
-                    <div class="flex items-start space-x-4">
-                        <svg class="w-6 h-6 text-blue-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">Email</h3>
-                            <p class="text-gray-400">daiki.kawasaki@riken.jp</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <svg class="w-6 h-6 text-blue-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        <div>
-                            <h3 class="text-xl font-semibold mb-2">所在地</h3>
-                            <p class="text-gray-400">〒351-0198</p>
-                            <p class="text-gray-400">埼玉県和光市広沢2-1</p>
-                            <p class="text-gray-400">メタフォトニクス研究チーム</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- X (Twitter) Icon -->
+                <a href="https://x.com/iaks1220" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                
+                <!-- Instagram Icon -->
+                <a href="https://www.instagram.com/im_daik" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-600 transition-all duration-300 transform hover:scale-110">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
             </div>
-
-        </div>
-
-    </div>
-</section>
-    </main>
-
-<!-- Footer with Social Media Icons -->
-<footer class="bg-black py-8">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-center space-x-6">
-            <!-- YouTube Icon -->
-            <a href="https://www.youtube.com/@im_daik" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-600 transition-colors">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-            </a>
             
-            <!-- X (Twitter) Icon -->
-            <a href="https://x.com/iaks1220" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-            </a>
-            
-            <!-- Instagram Icon -->
-            <a href="https://www.instagram.com/im_daik" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-600 transition-colors">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-            </a>
+            <div class="text-center mt-4 fade-element">
+                <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
+            </div>
         </div>
-        
-        <div class="text-center mt-4">
-            <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-
+    </footer>
 
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            const menuIcon = document.getElementById('menuIcon');
-            
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-            } else {
-                menu.classList.add('hidden');
-                menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>';
+        // ローディング画面の制御
+        class LoadingController {
+            constructor() {
+                this.loadingScreen = document.getElementById('loadingScreen');
+                this.mainContent = document.getElementById('mainContent');
+                this.loadingParticles = document.getElementById('loadingParticles');
+                this.isSkipped = false;
+                
+                this.init();
+            }
+
+            init() {
+                this.createLoadingParticles();
+                this.startLoadingSequence();
+            }
+
+            createLoadingParticles() {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        if (!this.isSkipped) {
+                            this.createParticle();
+                        }
+                    }, i * 200);
+                }
+            }
+
+            createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'loading-particle';
+                
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                // ランダムな色
+                const colors = ['#60A5FA', '#A855F7', '#F59E0B'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                
+                this.loadingParticles.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 4000);
+            }
+
+            startLoadingSequence() {
+                // 4.5秒後に自動的にメインコンテンツを表示
+                setTimeout(() => {
+                    if (!this.isSkipped) {
+                        this.showMainContent();
+                    }
+                }, 4500);
+            }
+
+            showMainContent() {
+                this.isSkipped = true;
+                this.loadingScreen.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    this.loadingScreen.style.display = 'none';
+                    this.mainContent.classList.add('loaded');
+                    
+                    // メインコンテンツのアニメーション開始
+                    this.initMainAnimations();
+                }, 1000);
+            }
+
+            initMainAnimations() {
+                // パーティクル生成開始
+                this.startParticleGeneration();
+                
+                // スクロールオブザーバー開始
+                this.initScrollAnimations();
+                
+                // その他のアニメーション初期化
+                this.initInteractiveEffects();
+            }
+
+            startParticleGeneration() {
+                setInterval(() => {
+                    this.createMainParticle();
+                }, 300);
+            }
+
+            createMainParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.getElementById('particles').appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 6000);
+            }
+
+            initScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.fade-element').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            initNavigation() {
+                // Mobile menu functionality
+                const menuButton = document.getElementById('menuButton');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuIcon = document.getElementById('menuIcon');
+                
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    if (mobileMenu.classList.contains('hidden')) {
+                        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>';
+                    } else {
+                        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+                    }
+                });
+
+                // Mobile dropdown functionality
+                document.querySelectorAll('[data-toggle="dropdown"]').forEach(link => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        
+                        const targetId = link.getAttribute('data-target');
+                        const iconId = link.getAttribute('data-icon');
+                        const submenu = document.getElementById(targetId);
+                        const icon = document.getElementById(iconId);
+
+                        if (event.target.tagName === 'svg' || event.target.tagName === 'path') {
+                            submenu.classList.toggle('hidden');
+                            
+                            if (submenu.classList.contains('hidden')) {
+                                icon.style.transform = 'rotate(0deg)';
+                            } else {
+                                icon.style.transform = 'rotate(180deg)';
+                            }
+                        } else {
+                            window.location.href = link.getAttribute('href');
+                        }
+                    });
+                });
+
+                // スムーズスクロール
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+
+            initCursorEffects() {
+                let mouseX = 0;
+                let mouseY = 0;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                // クリック時にカーソルパーティクルを生成
+                document.addEventListener('click', () => {
+                    this.createCursorParticle(mouseX, mouseY);
+                });
+            }
+
+            createCursorParticle(x, y) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = '#60A5FA';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.opacity = '0.7';
+                particle.style.zIndex = '9999';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.style.transition = 'opacity 0.5s, transform 0.5s';
+                    particle.style.opacity = '0';
+                    particle.style.transform = 'scale(2)';
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 500);
+                }, 100);
             }
         }
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('skiploading') === 'true') {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainContent = document.getElementById('mainContent');
+                if (loadingScreen && mainContent) {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.add('loaded');
+                }
+
+                // ここで .fade-element に .visible を即座に付与（全部一気に表示する場合）
+                document.querySelectorAll('.fade-element').forEach(el => {
+                    el.classList.add('visible');
+                });
+
+                // #contact へスクロール
+                setTimeout(() => {
+                    const contact = document.getElementById('contact');
+                    if (contact) {
+                        contact.scrollIntoView({behavior: "smooth", block: "start"});
+                    }
+                }, 100);
+                return;
+            }
+            // 通常のローディング処理
+            window.loadingController = new LoadingController();
+            console.log('川﨑大輝公式サイト - 拡張版が読み込まれました');
+        });
+
+        
+        // グローバル関数
+        function skipLoading() {
+            const controller = window.loadingController;
+            if (controller) {
+                controller.showMainContent();
+            }
+        }
+
+        // ランダムな色の変化
+        function randomizeColors() {
+            const colors = ['#60A5FA', '#A855F7', '#F59E0B', '#EF4444', '#10B981', '#8B5CF6'];
+            const particles = document.querySelectorAll('.particle');
+            
+            particles.forEach(particle => {
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            });
+        }
+
+        // 10秒ごとに色を変更
+        setInterval(randomizeColors, 10000);
+
+        // ナビゲーションハイライト
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-blue-400');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('text-blue-400');
+                }
+            });
+        });
     </script>
+
+    ```
+    <script>
+    const videoPaths = [
+    "assets/videos/video1.mp4",
+    "assets/videos/video2.mp4",
+    "assets/videos/video3.mp4",
+    "assets/videos/video4.mp4",
+    "assets/videos/video5.mp4",
+    "assets/videos/video6.mp4",
+    "assets/videos/video7.mp4",
+    ];
+
+    let currentVideo = 0;
+    const videoEl = document.getElementById('videoSlideshow');
+
+    // ←★ここで「常にミュート」にする！
+    videoEl.muted = true;
+
+    function playVideo(idx) {
+    videoEl.style.opacity = 0;  // フェードアウト
+    setTimeout(() => {
+    videoEl.src = videoPaths[idx];
+    videoEl.currentTime = 0;
+    videoEl.play();
+    videoEl.style.opacity = 1; // フェードイン
+    }, 400);
+    }
+
+    function nextVideo() {
+    currentVideo = (currentVideo + 1) % videoPaths.length;
+    playVideo(currentVideo);
+    }
+
+    // ループ再生
+    videoEl.addEventListener('ended', nextVideo);
+
+    // 最初の動画をセット
+    playVideo(currentVideo);
+
+    // （以下、ヒント用のコードそのまま）
+    const hint = document.getElementById('scrollHint');
+    window.addEventListener('scroll', () => {
+    if(window.scrollY > 30){
+    hint.classList.add('scroll-hint-hide');
+    } else {
+    hint.classList.remove('scroll-hint-hide');
+    }
+    });
+
+    </script>
+        
 </body>
 </html>

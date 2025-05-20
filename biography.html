@@ -22,7 +22,97 @@
                 background-clip: text;
                 color: transparent;
             }
-        </style>
+        
+        /* アニメーション定義 */
+        @keyframes gradientShift {
+                0% { background: linear-gradient(to right, #60A5FA, #A855F7); }
+                100% { background: linear-gradient(to right, #A855F7, #60A5FA, #F59E0B); }
+            }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* アニメーションクラス */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-fade-in-left {
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .animate-fade-in-right {
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .animate-pulse-custom {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+         /* 初期状態を非表示にする */
+         .fade-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
     </head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4MVF6FSQM"></script>
@@ -45,7 +135,7 @@
 
             <!-- Desktop Nav -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
+                <a href="index.html#home" class="text-sm text-gray-300 hover:text-white transition-colors">HOME</a>
                 <a href="biography.html" class="text-sm text-gray-300 hover:text-white transition-colors">BIOGRAPHY</a>
                 
                 <!-- Research Dropdown -->
@@ -86,7 +176,7 @@
                     </div>
                 </div>
 
-                <a href="index.html#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
+                <a href="index.html?skiploading=true#contact" class="text-sm text-gray-300 hover:text-white transition-colors">CONTACT</a>
             </div>   
         </div>
     </div>   
@@ -101,7 +191,7 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden bg-black">
         <div class="px-4 py-4 space-y-4">
-            <a href="index.html" class="block text-sm text-gray-300 hover:text-white">HOME</a>
+            <a href="index.html#home" class="block text-sm text-gray-300 hover:text-white">HOME</a>
             <a href="biography.html" class="block text-sm text-gray-300 hover:text-white">BIOGRAPHY</a>
             
             <!-- Mobile Research Submenu -->
@@ -134,7 +224,7 @@
                 </div>
             </div>
 
-            <a href="index.html#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
+            <a href="index.html?skiploading=true#contact" class="block text-sm text-gray-300 hover:text-white">CONTACT</a>
         </div>
     </div>
 
@@ -180,12 +270,42 @@
     <main class="pt-24 px-4">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-5xl font-bold text-center mb-16 gradient-text">BIOGRAPHY</h1>
-             
+            <div class="mb-16">
+                <section class="flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
+                    <div class="max-w-screen-xl mx-auto px-6 sm:px-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+                            <!-- 左側テキスト -->
+                            <div class="text-left">
+                                <h1 class="text-5xl font-bold mb-5 text-blue-400 fade-element">
+                                    川﨑 大輝
+                                </h1>
+                                <h1 class="text-3xl mb-6 text-blue-400 fade-element">
+                                    KAWASAKI Daiki
+                                </h1>
+                                <p class="text-xl text-gray-300 mb-8 fade-element">
+                                    Ph.D. (工学), Researcher (RIKEN / SPDR), Artist (AI'm)
+                                </p>
+                            </div>
+                            <!-- 右側画像 -->
+                            <div class="relative flex items-center justify-center">
+                                <div class="rounded-3xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-orange-500 p-1 fade-element"
+                                     style="max-width: 100%; width: 100%; max-width: 375px; height: auto;">
+                                    <img
+                                        src="assets/profile.png"
+                                        alt="Profile"
+                                        class="w-full h-auto object-cover rounded-3xl"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
 <!-- Experience -->
 <div class="mb-16">
-    <h2 class="text-3xl font-semibold text-center mb-8">Career</h2>
+    <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Career</h2>
     <div class="space-y-6">
-        <div class="bg-gray-900 p-6 rounded-2xl">
+        <div class="bg-gray-900 p-6 rounded-2xl fade-element">
             <div class="max-w-4xl mx-auto">
                 <table class="table-auto w-full" style="table-layout: fixed;">
                     <colgroup>
@@ -231,9 +351,9 @@
 
          <!-- Education -->
 <div class="mb-16">
-    <h2 class="text-3xl font-semibold text-center mb-8">Education</h2>
+    <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Education</h2>
     <div class="space-y-6">
-        <div class="bg-gray-900 p-6 rounded-2xl">
+        <div class="bg-gray-900 p-6 rounded-2xl fade-element">
             <div class="max-w-4xl mx-auto">
                 <table class="table-auto w-full" style="table-layout: fixed;">
                     <colgroup>
@@ -271,9 +391,9 @@
 
 <!-- Awards -->
 <div class="mb-16">
-    <h2 class="text-3xl font-semibold text-center mb-8">Awards</h2>
+    <h2 class="text-3xl font-semibold text-center mb-8 fade-element">Awards</h2>
     <div class="space-y-6">
-        <div class="bg-gray-900 p-6 rounded-2xl">
+        <div class="bg-gray-900 p-6 rounded-2xl fade-element">
             <div class="max-w-4xl mx-auto">
                 <table class="table-auto w-full" style="table-layout: fixed;">
                     <colgroup>
@@ -301,14 +421,37 @@
         </div>
     </main>
     <!-- Footer with Social Media Icons -->
-<footer class="bg-black py-8">
-    <div class="max-w-7xl mx-auto px-4">
-       
+    <footer class="bg-black py-8">
+        <div class="max-w-7xl mx-auto px-4">
         
-        <div class="text-center mt-4">
-            <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
+            
+            <div class="text-center mt-4">
+                <p class="text-gray-400">&copy; 2024 KAWASAKI Daiki. All rights reserved.</p>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
+    <script>
+    // IntersectionObserverを使ったfade-in処理
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+    
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+    
+      document.querySelectorAll('.fade-element').forEach(el => {
+        observer.observe(el);
+      });
+    });
+    </script>
+    
+
 </body>
 </html>
