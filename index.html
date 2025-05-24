@@ -24,7 +24,8 @@
     <!-- Favicon-->
     <link rel="icon" href="assets/favicon.ico" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-        <style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <style>
         .backdrop-blur-md {
             backdrop-filter: blur(12px);
         }
@@ -66,21 +67,15 @@
 
         .loading-title {
             font-size: 3.5rem;
-            font-weight: bold;
+            
             margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease-out 0.5s forwards;
+            font-family: 'Courier';
         }
 
-        .loading-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out 1s forwards;
-        }
-
+    
         .loading-description {
             font-size: 1rem;
             color: #9CA3AF;
@@ -90,29 +85,10 @@
             animation: fadeInUp 1s ease-out 1.5s forwards;
         }
 
-        .loading-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .loading-particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #60A5FA;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #60A5FA;
-            animation: particleMove 4s infinite linear;
-        }
-
+    
         .loading-progress {
             width: 100%;
-            max-width: 400px; 
+            max-width: 600px; 
             height: 2px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 1px;
@@ -128,7 +104,7 @@
             background: linear-gradient(90deg, #60A5FA, #A855F7);
             border-radius: 1px;
             width: 0%;
-            animation: progressLoad 2s ease-out 2.5s forwards;
+            animation: progressLoad 1s ease-out 2.5s forwards;
         }
 
 
@@ -249,21 +225,6 @@
             animation: particleMove 6s infinite linear;
         }
 
-        @keyframes particleFlash {
-            0% { opacity: 0; transform: scale(0.5); filter: blur(6px);}
-            10% { opacity: 1; transform: scale(1.2); filter: blur(2px);}
-            30% { opacity: 1; transform: scale(1); filter: blur(0);}
-            90% { opacity: 0.7; filter: blur(1px);}
-            100% { opacity: 0; transform: scale(0.8); filter: blur(8px);}
-            }
-            .loading-particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: particleFlash 1.5s linear forwards;
-            }
-
-
         @keyframes progressLoad {
             0% { width: 0%; }
             100% { width: 100%; }
@@ -301,19 +262,17 @@
 <body class="min-h-screen bg-black text-white">
     <!-- ローディング画面 -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-particles" id="loadingParticles"></div>
-        
         <div class="loading-content">
-            <h1 class="loading-title gradient-text">
+            <!--<h1 class="loading-title gradient-text">
                 川﨑 大輝
-            </h1>
-            <h2 class="loading-subtitle text-white">
-                KAWASAKI Daiki
+            </h1>-->
+            <h1 class="loading-title text-white">
+                Kawasaki Daiki
             </h2>
-            <p class="loading-description">
+            <!--<p class="loading-description">
                 光を介して調和する生命・自然・計算機<br>
                 Harmonizing Life, Nature, and Computers through Light
-            </p>
+            </p> -->
             <div class="loading-progress">
                 <div class="loading-progress-bar"></div>
             </div>
@@ -617,57 +576,14 @@
             constructor() {
                 this.loadingScreen = document.getElementById('loadingScreen');
                 this.mainContent = document.getElementById('mainContent');
-                this.loadingParticles = document.getElementById('loadingParticles');
                 this.isSkipped = false;
                 
                 this.init();
             }
 
             init() {
-                this.createLoadingParticles();
                 this.startLoadingSequence();
             }
-
-            createLoadingParticles() {
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => {
-                        if (!this.isSkipped) {
-                            this.createParticle();
-                        }
-                    }, i * 200);
-                }
-            }
-
-            createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'loading-particle';
-
-                // パーティクルサイズをやや大きめに
-                const size = Math.random() * 4 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-
-                // ランダムな画面座標
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-
-                // ランダムな色
-                const colors = ['#60A5FA', '#A855F7', '#F59E0B'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.boxShadow = `0 0 16px 6px ${particle.style.background}`;
-
-                // フラッシュするタイミングをずらす
-                particle.style.animationDelay = (Math.random() * 1.5) + 's';
-
-                this.loadingParticles.appendChild(particle);
-
-                // アニメ後に消す
-                setTimeout(() => {
-                    if (particle.parentNode) particle.remove();
-                }, 1600);
-
-            }
-
 
             startLoadingSequence() {
                 // 4.5秒後に自動的にメインコンテンツを表示
@@ -708,23 +624,6 @@
                 }, 300);
             }
 
-            createMainParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                const size = Math.random() * 4 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                
-                document.getElementById('particles').appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.remove();
-                }, 6000);
-            }
 
             initScrollAnimations() {
                 const observerOptions = {
@@ -886,18 +785,6 @@
             }
         }
 
-        // ランダムな色の変化
-        function randomizeColors() {
-            const colors = ['#60A5FA', '#A855F7', '#F59E0B', '#EF4444', '#10B981', '#8B5CF6'];
-            const particles = document.querySelectorAll('.particle');
-            
-            particles.forEach(particle => {
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            });
-        }
-
-        // 10秒ごとに色を変更
-        setInterval(randomizeColors, 10000);
 
         // ナビゲーションハイライト
         window.addEventListener('scroll', () => {
