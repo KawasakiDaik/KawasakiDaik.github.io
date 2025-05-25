@@ -66,8 +66,9 @@
         }
 
         .loading-title {
-            font-size: 3.5rem;
-            
+            font-size: min(10vw, 3.5rem); /* 横幅に応じて最大3.5rem、最小は10vwで自動縮小 */
+            white-space: nowrap;
+            text-align: center;font-size: 3.5rem;
             margin-bottom: 1rem;
             opacity: 0;
             transform: translateY(30px);
@@ -266,7 +267,7 @@
             <!--<h1 class="loading-title gradient-text">
                 川﨑 大輝
             </h1>-->
-            <h1 class="loading-title text-white whitespace-nowrap text-3xl sm:text-4xl md:text-5xl">
+            <h1 class="loading-title text-white">
                 Kawasaki Daiki
             </h1>
             <!--<p class="loading-description">
