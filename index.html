@@ -96,7 +96,7 @@
             overflow: hidden;
             margin-top: 2rem auto 0 auto;
             opacity: 0;
-            animation: fadeInUp 1s ease-out 2s forwards;
+            animation: fadeInUp 1s ease-out 1s forwards;
             display: block;
         }
 
@@ -105,7 +105,7 @@
             background: linear-gradient(90deg, #60A5FA, #A855F7);
             border-radius: 1px;
             width: 0%;
-            animation: progressLoad 1s ease-out 2.5s forwards;
+            animation: progressLoad 1s ease-out 1.5s forwards;
         }
 
 
@@ -587,12 +587,12 @@
             }
 
             startLoadingSequence() {
-                // 4.5秒後に自動的にメインコンテンツを表示
+                // 3秒後に自動的にメインコンテンツを表示
                 setTimeout(() => {
                     if (!this.isSkipped) {
                         this.showMainContent();
                     }
-                }, 4500);
+                }, 3000);
             }
 
             showMainContent() {
